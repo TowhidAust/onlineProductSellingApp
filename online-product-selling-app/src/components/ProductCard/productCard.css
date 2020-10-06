@@ -1,0 +1,40 @@
+  .Heading{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2%;
+    
+  }
+
+  .Heading h3{
+    align-self: flex-end;
+  }
+
+  .Heading select{
+    align-self: flex-end;
+  }
+
+  .productCardsCont{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+  }
+
+  .products{
+    width: 30%;
+    margin: 1%;
+    background-color: #191d2b;
+    border: 1px solid #2e344e;
+    border-top: 5px solid #2e344e;
+    padding: 2%;
+  }
+
+  .products img{
+    width: 100%;
+  }
+  .productTitle{
+    cursor: pointer;
+  }

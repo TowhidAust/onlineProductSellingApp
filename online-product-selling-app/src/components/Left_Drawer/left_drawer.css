@@ -1,0 +1,123 @@
+.left_drawer_container{
+    background-color: #191D2B;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 20vw;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+/* Avatar image */
+.avatar_image_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6%;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6%;
+}
+.avatar_image_div img{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 100%;
+    border: 1px solid #9FA7BE;
+
+}
+
+/* Drawer ul navigation tools */
+.left_drawer_ul{
+    padding: 0;
+
+}
+
+.left_drawer_ul li{
+    list-style: none;
+    margin: 0.5%;
+    text-align: center;
+    position: relative;
+
+}
+
+.left_drawer_ul li a{
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 3%;
+    /* background: #037BF9; */
+    transition: all .1s ease-out;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.left_drawer_ul li a:hover{
+    color:#037BF9;
+}
+
+.left_drawer_ul a:hover{
+    color: salmon;
+}
+
+.left_drawer_ul li a.active{
+    background-color: #037fff;
+    color: #fff;
+}
+.left_drawer_ul li a.inactive{
+    background: unset;
+    color: #fff;
+}
+
+.left_drawer_ul li a:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 100%;
+    height: 100%;
+    width: 0;
+    background: rgba(3,127,255,.2);
+    visibility: hidden;
+    transition: all .4s ease-out;
+    z-index: -1;
+}
+
+.left_drawer_ul li a:hover:before {
+    width: 100%;
+    visibility: visible;
+}
+
+.myImageAnchor{
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* collapse icon */
+.collapseIcon{
+    color: white;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 100%;
+    width: 59px;
+    border: 1px solid grey;
+    background-color: #191D2B;
+    padding: 2% 2% 4% 2%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.copyrightSection {
+    color: #fff;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    padding-top: 6%;
+    padding-bottom: 6%;
+}
+

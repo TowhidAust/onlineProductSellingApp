@@ -1,0 +1,110 @@
+/* About section */
+.AboutContainer{
+    display: flex;
+    background-color: #10121B;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin-left: 20%;
+    min-height: 100vh;
+}
+.aboutContents{
+    
+    /* background-image: url(https://images.unsplash.com/photo-1556388275-bb5585725aca?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max);
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+.aboutMeImage{
+   width: 35%;
+}
+.aboutMeImage .ownImage{
+    width: 100%;
+   max-height: 600px;
+   border: 1px solid #9FA7BE;
+   border-radius: 10px;
+}
+.aboutHeadingContainer{
+    width: 30%;
+
+}
+.aboutContentsInner{
+    padding: 5%;
+    /* background: rgba(0,0,0,0.7);
+    min-height: 100vh; */
+}
+
+.aboutHeading{
+    color: white;
+}
+
+.aboutMeAndDetailsCont{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 5%;
+    flex-flow: wrap;
+    min-height: 50vh;
+}
+
+.aboutMe{
+    width: 55%;
+    padding-left: 2%;
+}
+.aboutMe .aboutMeName{
+    color: white;
+}
+.aboutMeName span{
+    color: #037fff;
+}
+.aboutMe p{
+    color: #9FA7BE;
+    font-size: 18px;
+    margin: 1% 0;
+    display: flex;
+    
+}
+.cvDownloadButton{
+    width: 50%;
+}
+
+/* services section */
+.servicesHeader{
+    width: 30%;
+    margin-top: 10%;
+}
+
+.servicesHeader h1{
+    color: white;
+}
+
+.serviceContents{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.serviceContents h3{
+    font-size: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    margin: auto;
+}
+.serviceContents p{
+    color: #9FA7BE;
+}
+
+.s_WebDesign,.s_WebDevelopment,.s_MobileAppDevelopment{
+    background-color: #191d2b;
+    width: 30%;
+    margin-right: 3%;
+    padding: 1.5%;
+    min-height: 290px;
+    border:1px solid #2e344e;
+    border-top: 5px solid #2e344e;
+}
+
+
