@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import './addtoCartHome.css';
 import {RiDeleteBack2Line} from 'react-icons/ri';
-
-
+import { Link } from 'react-router-dom';
 export default class AddToCartHome extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            isDataLoaded: false
+        }
+    }
+    componentDidMount(){
+
+    }
+    
     render() {
         return (
             <>
@@ -15,8 +24,12 @@ export default class AddToCartHome extends Component {
                   
                     <div> 1 * $1000</div>
                     <div>Subtotal: $1000</div>
-                    <button>View Cart</button>
-                    <button>Check Out</button>
+                    <div className="homeCartButtonCont">
+                        <button> 
+                            <Link style={{color:"white", listStyle:"none", fontSize:"20px"}} to={"/CartPage/"}>View Cart</Link>
+                        </button>
+                        <button> <Link style={{color:"white", listStyle:"none", fontSize:"20px"}}>CheckOut</Link></button>
+                    </div>
                 </div>
             </>
         )

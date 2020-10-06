@@ -14,7 +14,7 @@ import Contact from "./components/Contact";
 import ProductDetails from "./components/ProductDetails";
 import LeftDrawer from './components/Left_Drawer';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import CartPage from './components/CartPage';
 
 function App(props) {
   return (
@@ -29,6 +29,8 @@ function App(props) {
               <Route path="/Blog" exact component={Blog}></Route>
               <Route path="/Contact" exact component={Contact}></Route>
               <Route path={`/ProductDetails/:${props.productid}`} exact component={ProductDetails} productdescription={props.productdescription}></Route>
+              <Route path="/CartPage" exact component={CartPage} ></Route>
+
             </Switch>
       </div>
         

@@ -1,0 +1,8 @@
+.homeCartButtonCont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.homeCartButtonCont button{
+    width: 50%;
+}

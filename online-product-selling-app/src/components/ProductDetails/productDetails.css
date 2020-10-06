@@ -17,17 +17,17 @@
     margin-top: 2%;
 }
 .descriptionInner .descriptions{
-    width: 70%;
+    width: 80%;
 }
 .descriptionInner .descriptions img{
     width: 100%;
 }
 .AddToCartDesc{
-    width: 30%;
+    width: 20%;
 }
 
 .imgNDetails{
-    width: 50%;
+    width: 60%;
 }
 .imgNDetails{
     display: flex;
@@ -35,6 +35,6 @@
     /* flex-flow: wrap; */
 }
 .priceNDetails{
-    width: 50%;
-    padding: 1%;
+    width: 40%;
+    padding: 3%;
 }

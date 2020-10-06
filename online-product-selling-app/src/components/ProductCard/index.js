@@ -55,7 +55,7 @@ export default class ProductCard extends Component {
                     <div className="Heading">
                         <h3>Shop</h3>
                        <SortingDropDown/>
-                       <AddToCartHome/>
+                       <AddToCartHome />
 
                     </div>
                     <div className="productCardsCont">

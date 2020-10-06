@@ -23,7 +23,6 @@ export default class ProductDetails extends Component {
                 productSampleData: data,
                 productID,
             });
-            
         });
     }
 
