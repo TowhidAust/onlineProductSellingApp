@@ -11,7 +11,9 @@ export default class ProductCard extends Component {
         super(props);
         this.state = {
             isDataLoaded: false,
-            productSampleData: []
+            productSampleData: [],
+            buttonState: 'Add To Cart',
+            
         }
     }
     
@@ -26,6 +28,23 @@ export default class ProductCard extends Component {
         
     }
 
+    homeCartStateChange(prodName, quantity, price) {
+        let cartInfo_ = [];
+        let count = 0;
+        cartInfo_.push(
+            {
+                productName: prodName,
+                quantity: count+1,
+                price: price,
+            }
+        )
+        
+        this.setState({
+            cartInfo: cartInfo_,
+            isItemAdded: true
+
+        })
+    }
 
     createProductCards(){
         const data =this.state.productSampleData;
@@ -38,7 +57,9 @@ export default class ProductCard extends Component {
 
                 <div> ${d.price} </div>
                 <div> {d.stock} products available </div>
-                <AddToCartButton/>
+                <AddToCartButton onclickCartStateChange={() => {
+                    this.homeCartStateChange(d.title, 1, d.price);
+                }}/>
             </div>
         ))
 
@@ -55,7 +76,7 @@ export default class ProductCard extends Component {
                     <div className="Heading">
                         <h3>Shop</h3>
                        <SortingDropDown/>
-                       <AddToCartHome />
+                    <AddToCartHome cartInfo={this.state.cartInfo} isItemAdded={this.state.isItemAdded}/>
 
                     </div>
                     <div className="productCardsCont">
