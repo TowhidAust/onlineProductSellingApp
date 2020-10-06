@@ -11,11 +11,12 @@ import Resume from "./components/Resume";
 import Portfolio from "./components/Portfolio";
 import Blog from "./components/Blog";
 import Contact from "./components/Contact";
+import ProductDetails from "./components/ProductDetails";
 import LeftDrawer from './components/Left_Drawer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function App() {
+function App(props) {
   return (
     <Router>
       <div className="MainAppContainer"> 
@@ -27,6 +28,7 @@ function App() {
               <Route path="/Portfolio" exact component={Portfolio}></Route>
               <Route path="/Blog" exact component={Blog}></Route>
               <Route path="/Contact" exact component={Contact}></Route>
+              <Route path={`/ProductDetails/:${props.productid}`}exact component={ProductDetails}></Route>
             </Switch>
       </div>
         

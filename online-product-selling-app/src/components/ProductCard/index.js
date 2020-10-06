@@ -3,6 +3,8 @@ import './productCard.css';
 import SortingDropDown from '../SortingDropDown';
 import AddToCartButton from '../AddToCartButton';
 import AddToCartHome from '../AddToCartHome';
+import { Link } from 'react-router-dom';
+
 
 export default class ProductCard extends Component {
     constructor(props){
@@ -33,7 +35,9 @@ export default class ProductCard extends Component {
         data.map((d) =>
            <div className="products" key={d._id}>
                 <img src="http://placehold.it/500x500" alt="prodImg"/>
-                <h3 className="productTitle" onClick={()=>{this.productTitleClickHandler(d)}} >{d.title}</h3>
+                {/* <h3 className="productTitle" onClick={()=>{this.productTitleClickHandler(d)}} >{d.title}</h3> */}
+                <Link style={{color:"white", listStyle:"none", fontSize:"20px"}} onClick={()=>{this.productTitleClickHandler(d)}} to={`/ProductDetails/:${d._id}`} productid = {d._id} productdescription = {d.description}>{d.title}</Link>
+
                 <div> ${d.price} </div>
                 <div> {d.stock} products available </div>
                 <AddToCartButton/>
