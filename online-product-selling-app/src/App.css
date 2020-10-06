@@ -44,3 +44,8 @@ button{
     transform: rotate(360deg);
   }
 }
+
+hr{
+  color: white;
+  background-color: white;
+}

@@ -22,8 +22,6 @@ export default class ProductCard extends Component {
         .then(response => response.json())
         .then((data) => {
             thisComponent.setState({productSampleData: data});
-            this.createProductCards();
-
         });
         
     }
@@ -34,7 +32,7 @@ export default class ProductCard extends Component {
        return (
         data.map((d) =>
            <div className="products" key={d._id}>
-                <img src="http://placehold.it/500x500" alt="prodImg"/>
+                <img src={d.picture} alt="prodImg"/>
                 {/* <h3 className="productTitle" onClick={()=>{this.productTitleClickHandler(d)}} >{d.title}</h3> */}
                 <Link style={{color:"white", listStyle:"none", fontSize:"20px"}} onClick={()=>{this.productTitleClickHandler(d)}} to={`/ProductDetails/:${d._id}`} productid = {d._id} productdescription = {d.description}>{d.title}</Link>
 

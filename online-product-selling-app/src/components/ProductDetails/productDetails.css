@@ -3,4 +3,38 @@
     margin-left: 20%;
     min-height: 100vh;
     background-color: #10121B;
+    color: white;
+}
+
+.descriptionInner{
+    padding: 3%;
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: wrap;
+}
+
+.descriptionInner h3{
+    margin-top: 2%;
+}
+.descriptionInner .descriptions{
+    width: 70%;
+}
+.descriptionInner .descriptions img{
+    width: 100%;
+}
+.AddToCartDesc{
+    width: 30%;
+}
+
+.imgNDetails{
+    width: 50%;
+}
+.imgNDetails{
+    display: flex;
+    width: 100%;
+    /* flex-flow: wrap; */
+}
+.priceNDetails{
+    width: 50%;
+    padding: 1%;
 }

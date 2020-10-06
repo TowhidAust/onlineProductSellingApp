@@ -28,7 +28,7 @@ function App(props) {
               <Route path="/Portfolio" exact component={Portfolio}></Route>
               <Route path="/Blog" exact component={Blog}></Route>
               <Route path="/Contact" exact component={Contact}></Route>
-              <Route path={`/ProductDetails/:${props.productid}`}exact component={ProductDetails}></Route>
+              <Route path={`/ProductDetails/:${props.productid}`} exact component={ProductDetails} productdescription={props.productdescription}></Route>
             </Switch>
       </div>
         
