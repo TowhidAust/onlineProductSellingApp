@@ -13,6 +13,8 @@ export default class ProductCard extends Component {
             isDataLoaded: false,
             productSampleData: [],
             buttonState: 'Add To Cart',
+            count: 0,
+             cartInfo: []
             
         }
     }
@@ -28,13 +30,14 @@ export default class ProductCard extends Component {
         
     }
 
-    homeCartStateChange(prodName, quantity, price) {
-        let cartInfo_ = [];
-        let count = 0;
+    homeCartStateChange(prodName, price) {
+        // quantity = 0;
+        let count_ = this.state.count;
+        let cartInfo_ = this.state.cartInfo;
         cartInfo_.push(
             {
                 productName: prodName,
-                quantity: count+1,
+                count: count_+1,
                 price: price,
             }
         )
@@ -58,7 +61,7 @@ export default class ProductCard extends Component {
                 <div> ${d.price} </div>
                 <div> {d.stock} products available </div>
                 <AddToCartButton onclickCartStateChange={() => {
-                    this.homeCartStateChange(d.title, 1, d.price);
+                    this.homeCartStateChange(d.title, d.price);
                 }}/>
             </div>
         ))
@@ -69,14 +72,40 @@ export default class ProductCard extends Component {
         console.log("clicked product id", data._id);
     }
 
+    // sorting the array with price according to state
+    onchangeHandlerSortLowToHigh() {
+        let productSampleDataSort = this.state.productSampleData;
+        productSampleDataSort.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        this.setState({
+            productSampleData: productSampleDataSort
+        })
+    }
+
+    onChangeHandlerHighToLow(){
+        let productSampleDataSort = this.state.productSampleData;
+        productSampleDataSort.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        this.setState({
+            productSampleData: productSampleDataSort
+        })
+    }
+
+    onChangeHandlerDefault() {
+        // fetch data from the github url
+        fetch('https://gist.githubusercontent.com/naieem/c138ff1f12847b2a1b8ad85866426d3d/raw/037825eee126d589ab3e1fff6c3d0119f33f3b5b/Products')
+        .then(response => response.json())
+        .then((data) => {
+            this.setState({productSampleData: data});
+        });
+    }
+
 
     render() {
         return (
             <>
                     <div className="Heading">
                         <h3>Shop</h3>
-                       <SortingDropDown/>
-                    <AddToCartHome cartInfo={this.state.cartInfo} isItemAdded={this.state.isItemAdded}/>
+                    <SortingDropDown onChangeSortLowToHigh={() => this.onchangeHandlerSortLowToHigh()} onChangeSortHighToLow={() => this.onChangeHandlerHighToLow()} defaultOnChange={()=>this.onChangeHandlerDefault()}/>
+                        <AddToCartHome cartInfo={this.state.cartInfo} isItemAdded={this.state.isItemAdded}/>
 
                     </div>
                     <div className="productCardsCont">

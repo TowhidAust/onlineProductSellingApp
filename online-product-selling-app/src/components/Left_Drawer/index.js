@@ -148,11 +148,6 @@ export default function LeftDrawer(props) {
           </div>
         <ul className="left_drawer_ul">
             <li><Link  className={`${activeStateHandler('Home')}`} onClick={()=>{navigationClickHandler('Home')}} to={"/"} >Home</Link></li>
-            <li><Link className={`${activeStateHandler('About')}`} onClick={()=>{navigationClickHandler('About')}} to={"/About"}>About</Link></li>
-            <li><Link className={`${activeStateHandler('Resume')}`} onClick={()=>{navigationClickHandler('Resume')}} to={"/Resume"}>Resume</Link></li>
-            <li><Link className={`${activeStateHandler('Portfolio')}`} onClick={()=>{navigationClickHandler('Portfolio')}}  to={"/Portfolio"}>Portfolio</Link></li>
-            <li><Link className={`${activeStateHandler('Blog')}`} onClick={()=>{navigationClickHandler('Blog')}} to={"/Blog"}>Blog</Link></li>
-            <li><Link className={`${activeStateHandler('Contact')}`} onClick={()=>{navigationClickHandler('Contact')}} to={"/Contact"}>Contact</Link></li>
         </ul>
        
         <div className="copyrightSection">&copy; Md. Towhidul Islam</div>
