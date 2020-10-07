@@ -4,6 +4,7 @@ import SortingDropDown from '../SortingDropDown';
 import AddToCartButton from '../AddToCartButton';
 import AddToCartHome from '../AddToCartHome';
 import { Link } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 export default class ProductCard extends Component {
@@ -25,7 +26,10 @@ export default class ProductCard extends Component {
         fetch('https://gist.githubusercontent.com/naieem/c138ff1f12847b2a1b8ad85866426d3d/raw/037825eee126d589ab3e1fff6c3d0119f33f3b5b/Products')
         .then(response => response.json())
         .then((data) => {
-            thisComponent.setState({productSampleData: data});
+            thisComponent.setState({
+                productSampleData: data,
+                isDataLoaded: true,
+            });
         });
         
     }
@@ -101,19 +105,31 @@ export default class ProductCard extends Component {
 
 
     render() {
-        return (
+        if(this.state.isDataLoaded){
+            return (
+                <>
+                        <div className="Heading">
+                            <h3>Shop</h3>
+                            <SortingDropDown onChangeSortLowToHigh={() => this.onchangeHandlerSortLowToHigh()} onChangeSortHighToLow={() => this.onChangeHandlerHighToLow()} defaultOnChange={()=>this.onChangeHandlerDefault()}/>
+                            <AddToCartHome cartInfo={this.state.cartInfo} isItemAdded={this.state.isItemAdded}/>
+    
+                        </div>
+                        <div className="productCardsCont">
+                            {this.createProductCards()}
+                        </div>
+    
+                </>
+            )
+
+        }else{
+
+            return(
             <>
-                    <div className="Heading">
-                        <h3>Shop</h3>
-                        <SortingDropDown onChangeSortLowToHigh={() => this.onchangeHandlerSortLowToHigh()} onChangeSortHighToLow={() => this.onChangeHandlerHighToLow()} defaultOnChange={()=>this.onChangeHandlerDefault()}/>
-                        <AddToCartHome cartInfo={this.state.cartInfo} isItemAdded={this.state.isItemAdded}/>
-
-                    </div>
-                    <div className="productCardsCont">
-                        {this.createProductCards()}
-                    </div>
-
+               Please wait..
+               <CircularProgress/>
             </>
-        )
+
+            )
+        }
     }
 }
