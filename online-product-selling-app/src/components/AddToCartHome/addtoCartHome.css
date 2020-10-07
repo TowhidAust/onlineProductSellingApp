@@ -8,12 +8,13 @@
 }
 
 .addToCartHome{
-    position: fixed;
-    top: 0%;
-    right: 0%;
-    background: #10121B;
-    z-index: 1;
-    width: 20vw;
-    height: 11vw;
-    overflow: auto;
+    width: 30%;
+    height: 18vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 2%;
+}
+
+.addToCartHome .products{
+    width: 100%;
 }

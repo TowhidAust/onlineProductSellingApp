@@ -9,7 +9,7 @@ import ProductDetails from "./components/ProductDetails";
 import LeftDrawer from './components/Left_Drawer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CartPage from './components/CartPage';
-import AddToCartHome from './components/AddToCartHome';
+// import AddToCartHome from './components/AddToCartHome';
 
 
 import React, { Component } from 'react'

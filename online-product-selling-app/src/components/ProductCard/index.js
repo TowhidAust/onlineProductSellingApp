@@ -104,7 +104,7 @@ export default class ProductCard extends Component {
             <>
                     <div className="Heading">
                         <h3>Shop</h3>
-                    <SortingDropDown onChangeSortLowToHigh={() => this.onchangeHandlerSortLowToHigh()} onChangeSortHighToLow={() => this.onChangeHandlerHighToLow()} defaultOnChange={()=>this.onChangeHandlerDefault()}/>
+                        <SortingDropDown onChangeSortLowToHigh={() => this.onchangeHandlerSortLowToHigh()} onChangeSortHighToLow={() => this.onChangeHandlerHighToLow()} defaultOnChange={()=>this.onChangeHandlerDefault()}/>
                         <AddToCartHome cartInfo={this.state.cartInfo} isItemAdded={this.state.isItemAdded}/>
 
                     </div>

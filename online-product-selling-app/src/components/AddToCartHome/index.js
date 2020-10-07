@@ -16,18 +16,38 @@ export default class AddToCartHome extends Component {
                 isItemAdded: true
             })
         }
+        
+
     }
 
    
+    cartInfoHandler(){
+        let cartInfoArr = this.props.cartInfo;
+        return (
+            cartInfoArr.map((d) =>
+               <div className="products" key={d._id}>
+                    <div>
+                        <RiDeleteBack2Line color="#E74B4A" style = {{fontSize: "25px"}} />
+                        prodName
+                    </div>
+                
+                    <div> 1 * $1000</div>
+                    <div>Subtotal: $1000</div>
+                   
+                </div>
+            ))
+       
+    }
     
     render() {
             if (this.props.isItemAdded) {
-                console.log(this.props.cartInfo);
+               
+                
             return (
                 <>
                     <div className="addToCartHome">
                         <h3 className="HomeCartHeading">Cart</h3>
-                        <div>
+                        {/* <div>
                             <RiDeleteBack2Line color="#E74B4A" style = {{fontSize: "25px"}} />
                                 prodName
                             </div>
@@ -39,7 +59,16 @@ export default class AddToCartHome extends Component {
                                 <Link style={{color:"white", listStyle:"none", fontSize:"20px"}} to={"/CartPage"}>View Cart</Link>
                             </button>
                             <button> <Link style={{color:"white", listStyle:"none", fontSize:"20px"}}to={"/"}>CheckOut</Link></button>
-                        </div>
+                        </div> */}
+
+                       
+                    {this.cartInfoHandler()}
+                    <div className="homeCartButtonCont">
+                        <button> 
+                            <Link style={{color:"white", listStyle:"none", fontSize:"20px"}} to={"/CartPage"}>View Cart</Link>
+                        </button>
+                        <button> <Link style={{color:"white", listStyle:"none", fontSize:"20px"}}to={"/"}>CheckOut</Link></button>
+                    </div>
                     </div>
                 </>
             )
