@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import "./cartPage.css";
 import {RiDeleteBack2Line} from 'react-icons/ri';
 import CartTotals from '../cartTotals';
@@ -38,6 +38,9 @@ export default class CartPage extends Component {
                         </tr>
                     </tbody>
                 </Table>
+                <div style={{display:"flex", justifyContent:"flex-end"}}>
+                    <Button>Update</Button>
+                </div>
                 
                 <CartTotals/>
 

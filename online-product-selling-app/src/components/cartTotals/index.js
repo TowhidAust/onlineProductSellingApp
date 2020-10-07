@@ -21,11 +21,7 @@ export default class CartTotals extends Component {
                             <td>$2000</td>
                         </tr>
                         
-                        <tr>
-                        <td >asdf</td>
-                            <td>Adress</td>
-                            <td>$2000</td>
-                        </tr>
+                       
                     </tbody>
                 </Table>
             </div>

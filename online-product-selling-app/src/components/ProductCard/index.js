@@ -34,18 +34,19 @@ export default class ProductCard extends Component {
         // quantity = 0;
         let count_ = this.state.count;
         let cartInfo_ = this.state.cartInfo;
+
+        let newData = {
+            productName: prodName,
+            count: count_+1,
+            price: price,
+        }
         cartInfo_.push(
-            {
-                productName: prodName,
-                count: count_+1,
-                price: price,
-            }
+            newData
         )
         
         this.setState({
             cartInfo: cartInfo_,
             isItemAdded: true
-
         })
     }
 

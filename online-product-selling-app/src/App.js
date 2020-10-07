@@ -23,7 +23,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    
+   
   }
 
   render() {
@@ -36,7 +36,7 @@ export default class App extends Component {
               <Switch>
                 <Route path="/" exact component={Home}></Route>
                 <Route path={`/ProductDetails/:${this.props.productid}`} exact component={ProductDetails} productdescription={this.props.productdescription}></Route>
-                <Route path="/CartPage" exact component={CartPage} ></Route>  
+                <Route path="/CartPage" exact component={CartPage}></Route>  
               </Switch>
         </div>
           

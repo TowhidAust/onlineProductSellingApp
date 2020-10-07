@@ -15,16 +15,17 @@ export default class AddToCartButton extends Component {
 
     }
 
-    // addToCartButtonClickHandler() {
-    //     this.setState({
-    //         buttonState:"Added"
-    //     })
+    addToCartButtonClickHandler() {
+        this.setState({
+            buttonState:"Added"
+        })
+        this.props.onclickCartStateChange();
 
-    // }
+    }
     render() {
         return (
             <>
-                <button onClick={this.props.onclickCartStateChange}>{this.state.buttonState}</button>
+                <button onClick={()=>{this.addToCartButtonClickHandler()}}>{this.state.buttonState}</button>
             </>
         )
     }

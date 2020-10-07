@@ -8,6 +8,7 @@ export default class AddToCartHome extends Component {
         this.state={
             isDataLoaded: false,
             isItemAdded: false,
+            subTotal: 0
         }
     }
     componentDidMount(){
@@ -20,51 +21,53 @@ export default class AddToCartHome extends Component {
 
     }
 
-   
+
+    calculateSubtotal(){
+        let cartInfoArr = this.props.cartInfo;
+        let subtotal = this.state.subTotal;
+        for(let index in cartInfoArr){
+            let dataJson = cartInfoArr[index];
+            // console.log('price', dataJson['price']);
+             subtotal = subtotal + dataJson['price'];
+
+        }
+        
+        return subtotal;
+    }
+ 
     cartInfoHandler(){
         let cartInfoArr = this.props.cartInfo;
+        
         return (
-            cartInfoArr.map((d) =>
-               <div className="products" key={d._id}>
+            cartInfoArr.map((d, index) =>
+               <div className="products" key={index}>
                     <div>
                         <RiDeleteBack2Line color="#E74B4A" style = {{fontSize: "25px"}} />
-                        prodName
+                        {d.productName}
                     </div>
                 
-                    <div> 1 * $1000</div>
-                    <div>Subtotal: $1000</div>
+                    <div> 1 * {d.price}</div>
                    
                 </div>
             ))
-       
     }
+
+    // setCartInfoForAddToCartPage(){
+    //     let cartInfo = this.props.cartInfo;
+    // }
     
     render() {
             if (this.props.isItemAdded) {
-               
-                
             return (
                 <>
                     <div className="addToCartHome">
-                        <h3 className="HomeCartHeading">Cart</h3>
-                        {/* <div>
-                            <RiDeleteBack2Line color="#E74B4A" style = {{fontSize: "25px"}} />
-                                prodName
-                            </div>
-                    
-                        <div> 1 * $1000</div>
-                        <div>Subtotal: $1000</div>
-                        <div className="homeCartButtonCont">
-                            <button> 
-                                <Link style={{color:"white", listStyle:"none", fontSize:"20px"}} to={"/CartPage"}>View Cart</Link>
-                            </button>
-                            <button> <Link style={{color:"white", listStyle:"none", fontSize:"20px"}}to={"/"}>CheckOut</Link></button>
-                        </div> */}
-
+                    <h3 className="HomeCartHeading">Cart</h3>
                        
                     {this.cartInfoHandler()}
+                    <hr/>
+                    <div>Subtotal: ${this.calculateSubtotal()}</div>
                     <div className="homeCartButtonCont">
-                        <button> 
+                        <button > 
                             <Link style={{color:"white", listStyle:"none", fontSize:"20px"}} to={"/CartPage"}>View Cart</Link>
                         </button>
                         <button> <Link style={{color:"white", listStyle:"none", fontSize:"20px"}}to={"/"}>CheckOut</Link></button>
