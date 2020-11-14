@@ -5,6 +5,7 @@ import AddToCartButton from '../AddToCartButton';
 import AddToCartHome from '../AddToCartHome';
 import { Link } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { Button } from '@material-ui/core';
 
 
 export default class ProductCard extends Component {
@@ -59,17 +60,16 @@ export default class ProductCard extends Component {
        return (
         data.map((d) =>
            <div className="products" key={d._id}>
-                <img src={d.picture} alt="prodImg"/>
-                {/* <h3 className="productTitle" onClick={()=>{this.productTitleClickHandler(d)}} >{d.title}</h3> */}
-                <Link style={{color:"white", listStyle:"none", fontSize:"20px"}} onClick={()=>{this.productTitleClickHandler(d)}} to={`/ProductDetails/:${d._id}`} productid = {d._id} productdescription = {d.description}>{d.title}</Link>
+                <img src="https://i1.adis.ws/i/canon/EOS-r5_Martin_Bissig_Lifestyle_hero-e90f9dd2-be19-11ea-b23c-8c04ba195b5f?w=100%&sm=aspect&aspect=16:9&qlt=80&fmt=jpg&fmt.options=interlaced&bg=rgb(255,255,255)" alt="prodImg"/>
+                
+                <p style={{listStyle:"none", fontSize:"1em", marginTop: "1em"}} onClick={()=>{this.productTitleClickHandler(d)}} to={`/ProductDetails/:${d._id}`} productid = {d._id} productdescription = {d.description}>{d.title}</p>
 
-                <div> ${d.price} </div>
-                <div> {d.stock} products available </div>
-                <AddToCartButton onclickCartStateChange={() => {
-                    this.homeCartStateChange(d.title, d.price);
-                }}/>
+                <div className="priceAndDiscount">
+                    <p>BDT. {d.price}</p>
+                    <span>15%</span>
+                </div>
             </div>
-        ))
+        ));
 
     }
 
@@ -108,16 +108,9 @@ export default class ProductCard extends Component {
         if(this.state.isDataLoaded){
             return (
                 <>
-                        <div className="Heading">
-                            <h3>Shop</h3>
-                            <SortingDropDown onChangeSortLowToHigh={() => this.onchangeHandlerSortLowToHigh()} onChangeSortHighToLow={() => this.onChangeHandlerHighToLow()} defaultOnChange={()=>this.onChangeHandlerDefault()}/>
-                            <AddToCartHome cartInfo={this.state.cartInfo} isItemAdded={this.state.isItemAdded}/>
-    
-                        </div>
-                        <div className="productCardsCont">
-                            {this.createProductCards()}
-                        </div>
-    
+                    <div className="productCardsCont">
+                        {this.createProductCards()}
+                    </div>
                 </>
             )
 

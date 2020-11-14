@@ -1,17 +1,85 @@
 
 .productBanner{
     display: flex;
-    width: 80%;
-    margin-left: 20%;
+    width: 100%;
     min-height: 100vh;
     position: relative;
-    background-color: #10121B;
-    color: white;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: auto;
   }
 
+  .headerSection{
+    display: flex;
+    justify-content: space-between !important;
+    align-items: center;
+    padding: 2em;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .homeLogo{
+    background-color: yellow;
+    border-radius: 5em;
+    position: relative;
+    width: 8em;
+    height: 3em;
+
+  }
+
+  .homeLogo h3{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-20%, -50%);
+    font-size: 1.5em;
+  }
+
+  .searchInput{
+    position: relative;
+    width: 30%;
+  }
+  .headerSection input{
+    border: none;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    padding: 2%;
+    outline: none;
+  }
+
+  .searchInput i{
+    position: absolute;
+    top: 16%;
+  }
+
+  .searchInput input::placeholder{
+    padding-left: 1em;
+    color: rgba(0,0,0,0.3);
+  }
+
+  .homeCart{
+    display: flex;
+    justify-content: space-between;
+    width: 5em;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .homeCart .cartCount{
+    background-color: yellow;
+    border-radius: 100%;
+    width: 1.5em;
+    height: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .userIcon{
+    cursor: pointer;
+  }
   
   

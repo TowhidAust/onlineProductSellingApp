@@ -22,20 +22,41 @@
     justify-content: center;
     align-items: center;
     flex-flow: wrap;
+    background-color: #FAFAFA;
   }
 
   .products{
-    width: 30%;
+    width: 20%;
     margin: 1%;
-    background-color: #191d2b;
-    border: 1px solid #2e344e;
-    border-top: 5px solid #2e344e;
-    padding: 2%;
+    padding: 1%;
+    background-color: #FFFFFF;
+    border-radius: 0.5em;
+    border: 1px solid #ddd;
+    min-height: 50vh;
   }
 
   .products img{
     width: 100%;
+    border-radius: 0.5em;
+    height: 200px;
   }
   .productTitle{
     cursor: pointer;
+  }
+
+  .priceAndDiscount{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .priceAndDiscount p{
+    margin: 0;
+  }
+
+  .priceAndDiscount span{
+    background: yellow;
+    padding: 1%;
+    width: 3em;
+    text-align: center;
   }

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import "./home.css";
 import ProductCard from "../ProductCard";
+import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export default class Home extends Component {
 
@@ -29,9 +32,20 @@ export default class Home extends Component {
     render() {
         return (
            
-               <section className="productBanner">
+            <>
+                <section className="productBanner">
+                    <div className="headerSection">
+                        <div className="homeLogo"><h3>Test Logo</h3></div>
+                        <div className="searchInput">
+                            <i><AiOutlineSearch/></i>
+                            <input type="text" placeholder="Search"/>
+                        </div>
+                        <div className="homeCart"> <i><AiOutlineShoppingCart/></i><span>Cart</span> <p className="cartCount">1</p> </div>
+                        <span className="userIcon"><AiOutlineUser/></span>
+                    </div>
                     <ProductCard/>
                 </section> 
+            </>
           
         )
     }
