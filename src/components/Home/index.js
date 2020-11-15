@@ -4,6 +4,7 @@ import ProductCard from "../ProductCard";
 import { AiOutlineUser } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 export default class Home extends Component {
 
@@ -11,7 +12,8 @@ export default class Home extends Component {
         super(props);
         this.state = {
             isDataLoaded: false,
-            productSampleData: []
+            productSampleData: [],
+            cartCount: 0,
         }
     }
     
@@ -27,6 +29,14 @@ export default class Home extends Component {
     }
 
 
+    getDataFromProductCardComponent = (data)=> {
+        console.log("data from product card", data);
+        this.setState({
+            cartCount: data.quantity,
+            chosenProducts: data
+        })
+    }
+
  
 
     render() {
@@ -40,10 +50,24 @@ export default class Home extends Component {
                             <i><AiOutlineSearch/></i>
                             <input type="text" placeholder="Search"/>
                         </div>
-                        <div className="homeCart"> <i><AiOutlineShoppingCart/></i><span>Cart</span> <p className="cartCount">1</p> </div>
+                        <div className="homeCart">
+                            <span>
+                                
+                                <Link style={{ textDecoration: "none", color: "black", display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }} to={{
+
+                                    pathname: "/CartPage",
+                                    data: this.state.chosenProducts,
+                                }} >
+                                    <i><AiOutlineShoppingCart /></i>
+                                    Cart
+                                    <p className="cartCount">{ this.state.cartCount}</p>
+                                    
+                                </Link>
+                            </span>
+                        </div>
                         <span className="userIcon"><AiOutlineUser/></span>
                     </div>
-                    <ProductCard/>
+                    <ProductCard getDataFromProductCard = {this.getDataFromProductCardComponent.bind(this)}/>
                 </section> 
             </>
           

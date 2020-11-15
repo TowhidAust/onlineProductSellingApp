@@ -1,12 +1,43 @@
-.cartPageContainer{
-    width: 80%;
-    margin-left: 20%;
-    min-height: 100vh;
-    background-color: #10121B;
-    color: white;
-    padding: 5%;
+.chosenProductDetails{
+    margin-top: 3em;
+}
+.chosenProduct{
+    width: 50em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 2em;
+    border: 1px solid #ddd;
+    border-radius: 1em;
 }
 
-.actionTable{
+.chosenProduct img{
+    width: 5em;
+    height: 5em;
+}
+
+.chosenProduct .column{
+    width: 30em;
+}
+
+.quantityPlusMinusDiv{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.quantityPlusMinusDiv .title{
+    margin-right: 1em;
+}
+.prodPlusMinus{
+    border: 1px solid #ddd;
+    border-radius: 1em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 30%;
+}
+
+.prodPlusMinus span{
     cursor: pointer;
 }

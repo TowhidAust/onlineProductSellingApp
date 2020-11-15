@@ -9,46 +9,82 @@ export default class ProductCard extends Component {
         super(props);
         this.state = {
             isDataLoaded: false,
-            productSampleData: [],
-            buttonState: 'Add To Cart',
-            count: 0,
-             cartInfo: []
+            productSampleData: [
+                {
+                  "_id": "5f4011d1fadf274a8862865a",
+                  "title": "TShirt",
+                  "picture": "https://cdn11.bigcommerce.com/s-pkla4xn3/images/stencil/1280x1280/products/11753/114418/2018-Fashion-New-Male-Shirt-Long-Sleeve-Mens-Clothes-Oblique-Button-Dress-Shirts-Mandarin-Collar-Men__02469.1574244136.jpg?c=2",
+                  "price": 1500,
+                  "discount": "15%",
+                },
+                {
+                    "_id": "5f4011d1fadf274a8862865b",
+                    "title": "TShirt",
+                    "picture": "https://cdn11.bigcommerce.com/s-pkla4xn3/images/stencil/1280x1280/products/11753/114418/2018-Fashion-New-Male-Shirt-Long-Sleeve-Mens-Clothes-Oblique-Button-Dress-Shirts-Mandarin-Collar-Men__02469.1574244136.jpg?c=2",
+                    "price": 1500,
+                    "discount": "15%",
+                  }
+              ],
+            quantity: 0,
+            chosenProducts: []
             
         }
     }
     
-    componentDidMount(){
+    componentDidMount() {
+        
+        console.log("component did mount");
         let thisComponent = this;
         // fetch data from the github url
-        fetch('https://gist.githubusercontent.com/naieem/c138ff1f12847b2a1b8ad85866426d3d/raw/037825eee126d589ab3e1fff6c3d0119f33f3b5b/Products')
-        .then(response => response.json())
-        .then((data) => {
-            thisComponent.setState({
-                productSampleData: data,
-                isDataLoaded: true,
-            });
+        // fetch('https://gist.githubusercontent.com/naieem/c138ff1f12847b2a1b8ad85866426d3d/raw/037825eee126d589ab3e1fff6c3d0119f33f3b5b/Products')
+        // .then(response => response.json())
+        //     .then((data) => {
+        //         console.log(data);
+        //     thisComponent.setState({
+        //         productSampleData: data,
+        //         isDataLoaded: true,
+        //     });
+        // });
+
+        thisComponent.setState({
+            isDataLoaded: true,
         });
+
+
+        
         
     }
 
-    homeCartStateChange(prodName, price) {
-        // quantity = 0;
-        let count_ = this.state.count;
-        let cartInfo_ = this.state.cartInfo;
-
-        let newData = {
-            productName: prodName,
-            count: count_+1,
-            price: price,
-        }
-        cartInfo_.push(
-            newData
-        )
-        
+    addToCartClickHandler(productID, productPicture, productName, productPrice) {
+     
         this.setState({
-            cartInfo: cartInfo_,
-            isItemAdded: true
-        })
+            quantity: this.state.quantity + 1,
+            chosenProducts: [...this.state.chosenProducts, {
+                "_id": productID,
+                "title": productName,
+                "picture": productPicture,
+                "price": productPrice,
+                "discount": "15%",
+            }]
+        });
+
+    }
+
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.quantity !== this.state.quantity) {
+            console.log("component update", this.state.chosenProducts);
+            this.props.getDataFromProductCard({
+                quantity: this.state.quantity,
+                chosenProducts: this.state.chosenProducts
+            });
+        } else {
+            // console.log("component donot update", this.state.quantity);  
+        }
+    }
+
+    getDataFromHomeComponent() {
+        
     }
 
     createProductCards(){
@@ -56,7 +92,7 @@ export default class ProductCard extends Component {
        return (
         data.map((d) =>
            <div className="products" key={d._id}>
-                <img src="https://i1.adis.ws/i/canon/EOS-r5_Martin_Bissig_Lifestyle_hero-e90f9dd2-be19-11ea-b23c-8c04ba195b5f?w=100%&sm=aspect&aspect=16:9&qlt=80&fmt=jpg&fmt.options=interlaced&bg=rgb(255,255,255)" alt="prodImg"/>
+                <img src={d.picture} alt="prodImg"/>
                 
                 <p style={{listStyle:"none", fontSize:"1em", marginTop: "1em"}} onClick={()=>{this.productTitleClickHandler(d)}} to={`/ProductDetails/:${d._id}`} productid = {d._id} productdescription = {d.description}>{d.title}</p>
 
@@ -66,16 +102,13 @@ export default class ProductCard extends Component {
                 </div>
 
                 <div className="addTocart">
-                    <Button>Add to cart</Button>
+                    <Button onClick={() => { this.addToCartClickHandler(d._id, d.title, d.picture, d.price);}} productname = {d.title} productprice = {d.price}>Add to cart</Button>
                 </div>
             </div>
         ));
-
     }
 
-    productTitleClickHandler(data){
-        console.log("clicked product id", data._id);
-    }
+  
 
     // sorting the array with price according to state
     onchangeHandlerSortLowToHigh() {

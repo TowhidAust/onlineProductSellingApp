@@ -2,7 +2,7 @@
 .productBanner{
     display: flex;
     width: 100%;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     position: relative;
     flex-direction: column;
     justify-content: center;
@@ -17,6 +17,7 @@
     padding: 2em;
     width: 100%;
     border-bottom: 1px solid #ddd;
+    background-color: #ffffff;
   }
 
   .homeLogo{
@@ -82,4 +83,11 @@
     cursor: pointer;
   }
   
+
+  .homeCart span{
+    display:flex; 
+    justify-content:space-between;
+    align-items:center; 
+    width: 100%;
+  }
   
