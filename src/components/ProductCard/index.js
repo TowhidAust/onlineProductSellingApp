@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import './productCard.css';
-import SortingDropDown from '../SortingDropDown';
-import AddToCartButton from '../AddToCartButton';
-import AddToCartHome from '../AddToCartHome';
-import { Link } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Button } from '@material-ui/core';
 
@@ -67,6 +63,10 @@ export default class ProductCard extends Component {
                 <div className="priceAndDiscount">
                     <p>BDT. {d.price}</p>
                     <span>15%</span>
+                </div>
+
+                <div className="addTocart">
+                    <Button>Add to cart</Button>
                 </div>
             </div>
         ));

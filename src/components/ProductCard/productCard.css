@@ -32,7 +32,8 @@
     background-color: #FFFFFF;
     border-radius: 0.5em;
     border: 1px solid #ddd;
-    min-height: 50vh;
+    min-height: 45vh;
+    position: relative;
   }
 
   .products img{
@@ -59,4 +60,48 @@
     padding: 1%;
     width: 3em;
     text-align: center;
+  }
+
+  .addTocart button{
+    background: yellow;
+    border-radius: 5em;
+    text-transform: inherit;
+  }
+
+  .addTocart button:hover{
+    background-color: yellow;
+  }
+
+  
+
+  .addTocart{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    transition: 0.3s;
+    opacity: 0;
+    border-radius: 3em;
+
+  }
+
+  .products:hover .addTocart{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    z-index: 1;
+    transition: 0.3s;
+    opacity: 1;
+    
   }
