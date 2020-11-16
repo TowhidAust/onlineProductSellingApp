@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './productCard.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Button } from '@material-ui/core';
-import { uniq } from 'lodash';
 
 
 export default class ProductCard extends Component {
@@ -35,7 +34,7 @@ export default class ProductCard extends Component {
     componentDidMount() {
         
         // console.log("component did mount");
-        let thisComponent = this;
+        // let thisComponent = this;
         // fetch data from the github url
         // fetch('https://gist.githubusercontent.com/naieem/c138ff1f12847b2a1b8ad85866426d3d/raw/037825eee126d589ab3e1fff6c3d0119f33f3b5b/Products')
         // .then(response => response.json())
@@ -47,7 +46,7 @@ export default class ProductCard extends Component {
         //     });
         // });
 
-        thisComponent.setState({
+        this.setState({
             isDataLoaded: true,
         });
         
@@ -65,7 +64,7 @@ export default class ProductCard extends Component {
             "quantity": 1,
         }]
         let _chosenProducts = this.state.chosenProducts;
-        let merge = [..._chosenProducts, ...data];
+        let mergedProd = [..._chosenProducts, ...data];
 
 
   
@@ -73,7 +72,7 @@ export default class ProductCard extends Component {
         // Now we can set the state without duplicate data 
         this.setState({
             quantity: this.state.quantity + 1,
-            chosenProducts: merge
+            chosenProducts: mergedProd
         });
 
 
@@ -83,12 +82,6 @@ export default class ProductCard extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.quantity !== this.state.quantity) {
-            let prevChosenProducts = prevState.chosenProducts;
-            let newChosenProducts = this.state.chosenProducts;
-
-            // console.log("prevChosenProducts, ",prevChosenProducts);
-            // console.log("newChosenProducts", newChosenProducts);
-        
             this.props.getDataFromProductCard({
                 quantity: this.state.quantity,
                 chosenProducts: this.state.chosenProducts

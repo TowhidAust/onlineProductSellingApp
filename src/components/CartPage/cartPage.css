@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 2em;
 }
 .chosenProdInner{
@@ -23,8 +23,10 @@
 .orderSummary{
     width: 30%;
     background: #fff;
-    margin: 2em;
+    margin-left: 2em;
     padding: 2em;
+    border-radius: 1em;
+    border: 1px solid #ddd;
 }
 
 .chosenProduct img{
@@ -55,4 +57,78 @@
 
 .prodPlusMinus span{
     cursor: pointer;
+}
+
+.promoCode input{
+    border-radius: 0.3em;
+    border: 1px solid #ddd;
+    padding: 0.3em;
+}
+.promoCode button{
+    border-radius: 0.3em;
+    background-color: #ddd;
+    padding: 0.3em;
+}
+
+.termsAndConditions{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    padding: 2em 0;
+}
+
+.termsAndConditions button{
+    background-color: yellow;
+    border: 1px solid #ddd;
+    padding: 0.3em;
+    border-radius: 0.3em;
+    margin-left: 1em;
+    width: 10em;
+}
+
+.termsAndConditions span{
+    margin-left: 1em;
+}
+
+.confirmationModal{
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmationModalInner{
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 1em;
+}
+
+.btnAdmin{
+    background-color: yellow;
+    border-radius: 1em;
+    padding: 0.5em;
+    border: 1px solid #ddd;
+}
+
+.confirmationModalInner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.confirmationModalInner .tick{
+    background-color: black;
+    color: white;
+    width: 1em;
+    height: 1em;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

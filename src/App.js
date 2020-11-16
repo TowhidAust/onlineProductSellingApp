@@ -11,6 +11,7 @@ import CartPage from './components/CartPage';
 
 
 import React, { Component } from 'react'
+import Admin from './components/AdminPanel';
 
 export default class App extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ export default class App extends Component {
             <Route path="/" exact component={Home}></Route>
             <Route path={`/ProductDetails/:${this.props.productid}`} exact component={ProductDetails} productdescription={this.props.productdescription}></Route>
             <Route path="/CartPage" exact component={CartPage}></Route>  
+            <Route path="/Admin" exact component={Admin}></Route>  
           </Switch>
         </div>
           
