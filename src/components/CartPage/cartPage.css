@@ -1,8 +1,16 @@
 .chosenProductDetails{
     margin-top: 3em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
 }
+.chosenProdInner{
+    width: 70%;
+}
+
 .chosenProduct{
-    width: 50em;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -10,6 +18,13 @@
     padding: 2em;
     border: 1px solid #ddd;
     border-radius: 1em;
+}
+
+.orderSummary{
+    width: 30%;
+    background: #fff;
+    margin: 2em;
+    padding: 2em;
 }
 
 .chosenProduct img{

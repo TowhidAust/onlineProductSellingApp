@@ -30,7 +30,7 @@ export default class Home extends Component {
 
 
     getDataFromProductCardComponent = (data)=> {
-        console.log("data from product card", data);
+        // console.log("data from product card", data);
         this.setState({
             cartCount: data.quantity,
             chosenProducts: data

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './productCard.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Button } from '@material-ui/core';
+import { uniq } from 'lodash';
 
 
 export default class ProductCard extends Component {
@@ -12,16 +13,16 @@ export default class ProductCard extends Component {
             productSampleData: [
                 {
                   "_id": "5f4011d1fadf274a8862865a",
-                  "title": "TShirt",
+                  "title": "TShirtXL",
                   "picture": "https://cdn11.bigcommerce.com/s-pkla4xn3/images/stencil/1280x1280/products/11753/114418/2018-Fashion-New-Male-Shirt-Long-Sleeve-Mens-Clothes-Oblique-Button-Dress-Shirts-Mandarin-Collar-Men__02469.1574244136.jpg?c=2",
                   "price": 1500,
-                  "discount": "15%",
+                  "discount": "5%",
                 },
                 {
                     "_id": "5f4011d1fadf274a8862865b",
-                    "title": "TShirt",
+                    "title": "TShirtSM",
                     "picture": "https://cdn11.bigcommerce.com/s-pkla4xn3/images/stencil/1280x1280/products/11753/114418/2018-Fashion-New-Male-Shirt-Long-Sleeve-Mens-Clothes-Oblique-Button-Dress-Shirts-Mandarin-Collar-Men__02469.1574244136.jpg?c=2",
-                    "price": 1500,
+                    "price": 1100,
                     "discount": "15%",
                   }
               ],
@@ -33,7 +34,7 @@ export default class ProductCard extends Component {
     
     componentDidMount() {
         
-        console.log("component did mount");
+        // console.log("component did mount");
         let thisComponent = this;
         // fetch data from the github url
         // fetch('https://gist.githubusercontent.com/naieem/c138ff1f12847b2a1b8ad85866426d3d/raw/037825eee126d589ab3e1fff6c3d0119f33f3b5b/Products')
@@ -49,31 +50,45 @@ export default class ProductCard extends Component {
         thisComponent.setState({
             isDataLoaded: true,
         });
-
-
-        
         
     }
 
     addToCartClickHandler(productID, productPicture, productName, productPrice) {
-     
+        // console.log(productID, productPicture, productName, productPrice);
+
+        let data = [{
+            "_id": productID,
+            "title": productName,
+            "picture": productPicture,
+            "price": productPrice,
+            "discount": "15%",
+            "quantity": 1,
+        }]
+        let _chosenProducts = this.state.chosenProducts;
+        let merge = [..._chosenProducts, ...data];
+
+
+  
+
+        // Now we can set the state without duplicate data 
         this.setState({
             quantity: this.state.quantity + 1,
-            chosenProducts: [...this.state.chosenProducts, {
-                "_id": productID,
-                "title": productName,
-                "picture": productPicture,
-                "price": productPrice,
-                "discount": "15%",
-            }]
+            chosenProducts: merge
         });
+
+
 
     }
 
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.quantity !== this.state.quantity) {
-            console.log("component update", this.state.chosenProducts);
+            let prevChosenProducts = prevState.chosenProducts;
+            let newChosenProducts = this.state.chosenProducts;
+
+            // console.log("prevChosenProducts, ",prevChosenProducts);
+            // console.log("newChosenProducts", newChosenProducts);
+        
             this.props.getDataFromProductCard({
                 quantity: this.state.quantity,
                 chosenProducts: this.state.chosenProducts
@@ -102,7 +117,7 @@ export default class ProductCard extends Component {
                 </div>
 
                 <div className="addTocart">
-                    <Button onClick={() => { this.addToCartClickHandler(d._id, d.title, d.picture, d.price);}} productname = {d.title} productprice = {d.price}>Add to cart</Button>
+                    <Button onClick={() => { this.addToCartClickHandler(d._id, d.picture, d.title, d.price);}} productname = {d.title} productprice = {d.price}>Add to cart</Button>
                 </div>
             </div>
         ));
