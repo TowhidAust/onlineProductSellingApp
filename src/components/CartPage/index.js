@@ -300,7 +300,7 @@ export default class CartPage extends Component {
 
                             <hr/>
                             <div className="promoCode">
-                                <span className="promoCodeErrorMsg">{ this.state.errorMessage}</span>
+                                <div className="promoCodeErrorMsg">{ this.state.errorMessage}</div>
                                 <input onChange={(e)=>this.promocodeInputOnchangeHandler(e)} type="text" placeholder="Promo eg: ABCD" />
                                 <button onClick={(e)=>this.applyPromoCodeClickHandler(e)}>Apply</button>
                             </div>

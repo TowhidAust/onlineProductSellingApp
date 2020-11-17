@@ -1,0 +1,15 @@
+.adminPanel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.adminPanel .adminInner{
+    background-color: #ffffff;
+    padding: 2em;
+    border-radius: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
