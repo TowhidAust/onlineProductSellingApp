@@ -305,7 +305,7 @@ export default class CartPage extends Component {
                                 <button onClick={(e)=>this.applyPromoCodeClickHandler(e)}>Apply</button>
                             </div>
 
-                            <hr />
+                            <hr/>
                             
                             <p>Total Payable: BDT { this.state.totalAmount }</p>
                         </div>

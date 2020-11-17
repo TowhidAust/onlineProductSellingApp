@@ -12,6 +12,10 @@ import CartPage from './components/CartPage';
 
 import React, { Component } from 'react'
 import Admin from './components/AdminPanel';
+import adminDetails from './components/AdminPanel/adminDetails';
+import Products from './components/AdminPanel/products';
+import AddNewProduct from './components/AdminPanel/addNewProd';
+import Orders from './components/AdminPanel/orders';
 
 export default class App extends Component {
   constructor(props) {
@@ -35,6 +39,10 @@ export default class App extends Component {
             <Route path={`/ProductDetails/:${this.props.productid}`} exact component={ProductDetails} productdescription={this.props.productdescription}></Route>
             <Route path="/CartPage" exact component={CartPage}></Route>  
             <Route path="/Admin" exact component={Admin}></Route>  
+            <Route path="/AdminDetails" exact component={adminDetails}></Route>  
+            <Route path="/AdminProducts" exact component={Products}></Route>  
+            <Route path="/AddNewProduct" exact component={AddNewProduct}></Route>  
+            <Route path="/Orders" exact component={Orders}></Route>  
           </Switch>
         </div>
           

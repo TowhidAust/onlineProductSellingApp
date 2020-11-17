@@ -3,6 +3,12 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column;
+}
+
+.adminPanel .header{
+    margin: 1em 0;
+    font-size: 1.5em;
 }
 .adminPanel .adminInner{
     background-color: #ffffff;
@@ -13,3 +19,265 @@
     align-items: center;
     flex-direction: column;
 }
+.adminPanel .adminInner .userID{
+    margin: 0.3em 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.adminPanel .adminInner .password{
+    margin: 0.3em 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.adminPanel .adminInner input{
+    outline: none;
+    border: 1px solid #dddddd;
+    padding: 0.3em;
+    border-radius: 0.3em;
+}
+
+.loginCredentials{
+    margin: 1em;
+}
+
+.signInButton{
+    border: 1px solid #ddd;
+    padding: 0.3em;
+    background-color: yellow;
+    width: 8em;
+    margin: 1em;
+    border-radius: 0.3em;
+}
+
+
+
+/* Products css */
+.adminProductsCard{
+display: flex;
+justify-content: center;
+align-items: flex-start;
+/* height: 100vh; */
+overflow: auto;
+/* max-height: 87vh; */
+
+}
+
+.adminProductsCard .leftDrawer{
+    width: 20em;
+    height: 87vh;
+}
+
+.left_drawer_container{
+    height: 100%;
+}
+
+.adminProductsCard .cardsContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+}
+
+.admin_products{
+    width: 20em;
+    margin: 1%;
+    padding: 1%;
+    background-color: #FFFFFF;
+    border-radius: 0.5em;
+    border: 1px solid #ddd;
+    min-height: 55vh;
+    position: relative;
+}
+
+.admin_products img{
+    width: 100%;
+    border-radius: 0.5em;
+    height: 300px;
+}
+
+.adminProductsCard .rightPanel{
+    width: 80em;
+    height: 87vh;
+    overflow: auto;
+}
+
+.admin_header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin_header .logo{
+    background-color: yellow;
+    padding: 0.3em;
+    border-radius: 1em;
+    position: relative;
+    width: 5em;
+    height: 2em;
+}
+
+.admin_header .logo span{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-20%, -50%);
+}
+
+
+/* Add new prod button */
+.addNewProd{
+    width: 12em;
+}
+.addNewProd button{
+    background-color: white;
+    border: none;
+    border-radius: 0.3em;
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid #ddd;
+
+}
+
+
+
+/* Add Product inputs css */
+.addProductContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.addProductInner{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2em;
+    border-radius: 0.3em;
+
+}
+
+.addProductInner input{
+    outline: none;
+    border-radius: 0.3em;
+    border: 1px solid #ddd;
+}
+
+.addProductContainer button{
+    background-color: yellow;
+    border: 1px solid #ddd;
+    padding: 0.5em;
+}
+
+.prodActiveDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.prodActiveDiv span{
+    cursor: pointer;
+}
+
+
+
+/* order page css */
+.order_topCards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.order_topCards .card{
+    padding: 2em;
+    border-radius: 1em;
+    width: 10em;
+    margin: 1em;
+}
+
+.serialHeadings{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+}
+
+.serialHeadings div{
+    padding: 1em;
+}
+
+.serialHeadings .serial{
+    width: 15%;
+}
+.serialHeadings .price{
+    width: 25%;
+}
+.serialHeadings .actionButtons{
+    width: 35%;
+}
+.serialHeadings .status{
+    width: 25%;
+}
+
+
+
+.orderCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    background-color:#ffffff;
+    margin: 1%;
+
+}
+
+.orderCard div{
+    padding: 1em;
+    border-radius: 0.3em;
+
+}
+
+.orderCard .serial{
+    width: 15%;
+}
+.orderCard .price{
+    width: 25%;
+}
+.orderCard .actionButtons{
+    width: 35%;
+}
+.orderCard .status{
+    width: 25%;
+}
+
+
+
+.actionButtons button{
+    border: 1px solid #ddd;
+    padding: 0.5em;
+    border-radius: 1em;
+    width: 5em;
+}
+
+.btnConfirm{
+    background-color: yellow;
+    /* color: #ffffff; */
+}
+
+.btnCancel{
+    background-color: red;
+    color: #ffffff;
+}
+
