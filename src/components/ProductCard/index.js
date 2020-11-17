@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './productCard.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Button } from '@material-ui/core';
+import { database } from '../../firebase';
 
 
 export default class ProductCard extends Component {
@@ -33,18 +34,41 @@ export default class ProductCard extends Component {
     
     componentDidMount() {
         
-        // console.log("component did mount");
-        // let thisComponent = this;
-        // fetch data from the github url
-        // fetch('https://gist.githubusercontent.com/naieem/c138ff1f12847b2a1b8ad85866426d3d/raw/037825eee126d589ab3e1fff6c3d0119f33f3b5b/Products')
-        // .then(response => response.json())
-        //     .then((data) => {
-        //         console.log(data);
-        //     thisComponent.setState({
-        //         productSampleData: data,
-        //         isDataLoaded: true,
-        //     });
-        // });
+            
+            // first fetch products from backend
+            fetch('http://localhost:5000/products')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // now modify the data
+                let _productSampleData = [];
+                for (let key in data) {
+                    let product = data[key];
+                    _productSampleData.push(product);
+                }
+
+                this.setState({
+                    productSampleData: _productSampleData
+                })
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        
+        // Fetch cart
+        fetch('http://localhost:5000/cart')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                let _quantity = data.quantity;
+                this.setState({
+                    quantity : _quantity
+                })
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
         this.setState({
             isDataLoaded: true,
@@ -55,16 +79,48 @@ export default class ProductCard extends Component {
     addToCartClickHandler(productID, productPicture, productName, productPrice) {
         // console.log(productID, productPicture, productName, productPrice);
 
-        let data = [{
+        let data = {
             "_id": productID,
             "title": productName,
             "picture": productPicture,
             "price": productPrice,
             "discount": "15%",
             "quantity": 1,
-        }]
+        }
         let _chosenProducts = this.state.chosenProducts;
-        let mergedProd = [..._chosenProducts, ...data];
+        let mergedProd = [..._chosenProducts, data];
+
+
+        
+
+        // const data_ = { 'username': 'example' };
+
+        fetch('http://localhost:5000/addToCart', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 'username': 'example' }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+
+
+
+
+
+
+
+        this.setState({
+            isDataLoaded: true,
+        });
 
 
   
@@ -98,15 +154,15 @@ export default class ProductCard extends Component {
     createProductCards(){
         const data =this.state.productSampleData;
        return (
-        data.map((d) =>
-           <div className="products" key={d._id}>
+        data.map((d,index) =>
+           <div className="products" key={index}>
                 <img src={d.picture} alt="prodImg"/>
                 
                 <p style={{listStyle:"none", fontSize:"1em", marginTop: "1em"}} onClick={()=>{this.productTitleClickHandler(d)}} to={`/ProductDetails/:${d._id}`} productid = {d._id} productdescription = {d.description}>{d.title}</p>
 
                 <div className="priceAndDiscount">
                     <p>BDT. {d.price}</p>
-                    <span>15%</span>
+                    <span>{d.discount}%</span>
                 </div>
 
                 <div className="addTocart">

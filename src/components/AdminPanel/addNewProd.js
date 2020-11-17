@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-// import { database } from '../../firebase';
+import { database } from '../../firebase';
 
 
 
@@ -40,7 +40,6 @@ export default class AddNewProduct extends Component {
     onchangeNameHandler = (e) => {
 
         this.setState({
-            productID: uuidv4(),
             productTitle: e.target.value,
         })
         
@@ -94,6 +93,9 @@ export default class AddNewProduct extends Component {
 
 
     submitButtonClickHandler = (e) => {
+        this.setState({
+            productID: uuidv4()
+        })
         if (this.state.productID ==='' ||
             this.state.productTitle ==='' ||
             this.state.productPrice ==='' ||
@@ -114,16 +116,16 @@ export default class AddNewProduct extends Component {
                 "discount": this.state.productDiscount,
             }
 
-            let _productSampleData = [];
-            let newData = _productSampleData.push(data);
-
-            this.setState({
-                productSampleData: newData
+            database.ref('/products').once("value").then((snapshot) => {
+                console.log("data from db=",snapshot.val());
             })
 
-            
 
-            alert("product data added successfully");
+
+            database.ref('/Products').push(data).then((snapshot) => {
+                console.log(snapshot.key);
+                alert("product data added successfully");
+            });
 
         }
     }
