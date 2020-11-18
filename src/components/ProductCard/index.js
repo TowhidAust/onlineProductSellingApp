@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './productCard.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Button } from '@material-ui/core';
-import { database } from '../../firebase';
 
 
 export default class ProductCard extends Component {
@@ -34,46 +33,61 @@ export default class ProductCard extends Component {
     
     componentDidMount() {
         
-            
-            // first fetch products from backend
-            fetch('http://localhost:5000/products')
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                // now modify the data
-                let _productSampleData = [];
-                for (let key in data) {
-                    let product = data[key];
-                    _productSampleData.push(product);
-                }
+        this.fetchProductFromBackendDatabase();
+        this.fetchCart();
+        this.setState({
+            isDataLoaded: true,
+        });
+        
+    }
 
+
+    // fetch products from backend
+    fetchProductFromBackendDatabase = () => {
+        // first fetch products from backend
+        fetch('http://localhost:5000/products')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // now modify the data
+            let _productSampleData = [];
+            for (let key in data) {
+                let product = data[key];
+                _productSampleData.push(product);
+            }
+
+            if (data.msg !== 'undefined') {
                 this.setState({
                     productSampleData: _productSampleData
                 })
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        
+            }
+
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+
+    // fetch cart from backend
+    fetchCart = () => {
         // Fetch cart
         fetch('http://localhost:5000/cart')
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
                 let _quantity = data.quantity;
-                this.setState({
-                    quantity : _quantity
-                })
+
+                if (_quantity) {
+                    this.setState({
+                        quantity: _quantity
+                    });
+                }
 
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
-
-        this.setState({
-            isDataLoaded: true,
-        });
-        
     }
 
     addToCartClickHandler(productID, productPicture, productName, productPrice) {
@@ -89,19 +103,30 @@ export default class ProductCard extends Component {
         }
         let _chosenProducts = this.state.chosenProducts;
         let mergedProd = [..._chosenProducts, data];
+        this.setState({
+            quantity: this.state.quantity + 1,
+            chosenProducts: mergedProd
+        });
 
 
-        
+        this.addCartInfoOnBackendDatabase(data);
 
-        // const data_ = { 'username': 'example' };
 
+        this.setState({
+            isDataLoaded: true,
+        });
+    }
+
+
+    addCartInfoOnBackendDatabase = (data) => {
+        // add product on cart database
         fetch('http://localhost:5000/addToCart', {
         method: 'POST', // or 'PUT'
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 'username': 'example' }),
+        body: JSON.stringify(data),
         })
         .then(response => response.json())
         .then(data => {
@@ -110,34 +135,33 @@ export default class ProductCard extends Component {
         .catch((error) => {
             console.error('Error:', error);
         });
-
-
-
-
-
-
-
-
-        this.setState({
-            isDataLoaded: true,
-        });
-
-
-  
-
-        // Now we can set the state without duplicate data 
-        this.setState({
-            quantity: this.state.quantity + 1,
-            chosenProducts: mergedProd
-        });
-
-
-
     }
 
 
+    // add quantity on cart database
+    addQuantityOnCartDatabase = () => {
+            fetch('http://localhost:5000/addQuantityToCart', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({quantity:this.state.quantity}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (prevState.quantity !== this.state.quantity) {
+        
+            this.addQuantityOnCartDatabase();
+
             this.props.getDataFromProductCard({
                 quantity: this.state.quantity,
                 chosenProducts: this.state.chosenProducts
@@ -147,9 +171,6 @@ export default class ProductCard extends Component {
         }
     }
 
-    getDataFromHomeComponent() {
-        
-    }
 
     createProductCards(){
         const data =this.state.productSampleData;
@@ -172,7 +193,6 @@ export default class ProductCard extends Component {
         ));
     }
 
-  
 
     // sorting the array with price according to state
     onchangeHandlerSortLowToHigh() {

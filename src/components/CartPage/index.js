@@ -3,6 +3,7 @@ import "./cartPage.css";
 import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineUser } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { TiTick } from 'react-icons/ti';
+import { get } from 'lodash';
 export default class CartPage extends Component {
 
     constructor(props) {
@@ -25,30 +26,66 @@ export default class CartPage extends Component {
     }
 
     componentDidMount() {
-
-        const { data } = this.props.location;
-        // console.log("data from props location", data);
-        if (data) {
-
-          let mergedChosenProd = this.removeDuplicatesFromArr(data.chosenProducts);
-        
-            let totalAmount = this.calculateTotalAmount(mergedChosenProd);
-            console.log("Total Amount", totalAmount);
-            this.setState({
-                isDataLoaded: true,
-                cartCount: data.quantity,
-                chosenProducts: mergedChosenProd,
-                totalAmount: totalAmount
-            })
-        } else {
-            this.setState({
-                cartCount: 0,
-                chosenProducts: []
-            })
-        }
+        this.fetchCartFromDatabase();
     }
 
 
+
+    fetchCartFromDatabase = () => {
+        
+        // Fetch cart from db
+        fetch('http://localhost:5000/cart')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            let _chosenProductsJSON = get(data, ['chosenProducts'], {});
+
+            // refactor the data
+            let _chosenProducts = [];
+            for (let key in _chosenProductsJSON) {
+                let products = _chosenProductsJSON[key];
+                _chosenProducts.push(products);
+            }
+            let _quantity = data.quantity;
+            let _mergedChosenProd = this.removeDuplicatesFromArr(_chosenProducts);
+
+
+            this.setState({
+                cartCount: _quantity,
+                chosenProducts: _mergedChosenProd
+            })
+
+        }).then(() => {
+            this.addTotalAmountToDatabase();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    addTotalAmountToDatabase = () => {
+        let _totalAmount = this.calculateTotalAmount(this.state.chosenProducts);
+        // console.log("total amount", totalAmount);
+        fetch('http://localhost:5000/addTotalAmount', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'totalAmount':_totalAmount}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                this.setState({
+                    totalAmount: _totalAmount
+                })
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+    }
 
     // remove duplicate products from the array and calculate the quantity of the same product
     removeDuplicatesFromArr(arr) {
@@ -83,10 +120,25 @@ export default class CartPage extends Component {
         return totalPrice;
     }
 
-
     productPlusClickHandler = (e) => {
         let productId = e.target.getAttribute('productid');
+        let productTitle = e.target.getAttribute('product_title');
+        let productPrice = e.target.getAttribute('product_price');
+        let productPicture = e.target.getAttribute('product_picture');
+        let productDiscount = e.target.getAttribute('product_discount');
+        let productQuantity = e.target.getAttribute('product_quantity');
         let _chosenProductsJson = this.state.chosenProducts;
+
+        let data =   {
+            "_id": productId,
+            "title": productTitle,
+            "picture": productPicture,
+            "price": productPrice,
+            "discount": productDiscount,
+            "quantity" : productQuantity
+        }
+        
+        this.addTocartAfterClickingPlusButton(data);
 
         for (let i in _chosenProductsJson) {
             let currentProdId = _chosenProductsJson[i]['_id'];
@@ -108,11 +160,82 @@ export default class CartPage extends Component {
  
     }
 
-  
+    // add to database cart info
+    addTocartAfterClickingPlusButton = (data) => {
+        // add product on cart database
+        fetch('http://localhost:5000/addToCart', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            this.setState({
+                cartCount: this.state.cartCount + 1
+            })
+            this.addQuantityOnCartDatabase();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
 
+    // remove from databse cart after clicking minus button
+    removeFromDBCartAfterClickingMinusButton = (data) => {
+        // add product on cart database
+        fetch('http://localhost:5000/removeSingleDataFromCart', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // this.setState({
+            //     cartCount: this.state.cartCount + 1
+            // })
+            // this.addQuantityOnCartDatabase();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    // add quantity on cart database
+    addQuantityOnCartDatabase = () => {
+        fetch('http://localhost:5000/addQuantityToCart', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({quantity:this.state.cartCount}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+  
     productMinusClickHandler = (e) => {
         let productId = e.target.getAttribute('productid');
         let _chosenProductsJson = this.state.chosenProducts;
+
+        let data = {
+            "productId": productId
+        }
+        this.removeFromDBCartAfterClickingMinusButton(data);
 
         for (let i in _chosenProductsJson) {
             let currentProdId = _chosenProductsJson[i]['_id'];
@@ -242,7 +365,7 @@ export default class CartPage extends Component {
                             <div className="prodPlusMinus">
                                 <span onClick={(e)=>this.productMinusClickHandler(e)} productid={d._id}>-</span>
                                 <span>{d.quantity}</span>
-                                <span onClick={(e)=>this.productPlusClickHandler(e)} productid = {d._id}>+</span>
+                                <span onClick={(e)=>this.productPlusClickHandler(e)} productid = {d._id} product_title={d.title} product_picture={d.picture} product_price={d.price} product_discount={d.discount} product_quantity={1}>+</span>
                             </div>
                         </div>
                         <div>Total Price: <span>{ d.quantity * d.price}</span></div>
