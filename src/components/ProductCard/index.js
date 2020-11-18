@@ -41,7 +41,6 @@ export default class ProductCard extends Component {
         
     }
 
-
     // fetch products from backend
     fetchProductFromBackendDatabase = () => {
         // first fetch products from backend
@@ -62,12 +61,25 @@ export default class ProductCard extends Component {
                 })
             }
 
+        }).then(() => {
+            let searchKey = this.props.searchKey;
+            console.log(searchKey);
+            // const items = this.state.productSampleData.filter((data)=>{
+            //     if (searchKey == null) {
+            //         console.log('search state is null');
+            //         return data;
+            //     }
+            //     else if (data.title.toLowerCase().includes(searchKey.toLowerCase())) {
+            //         console.log('Search State is not null', data);
+                    
+            //         return data
+            //     }
+            //   })
         })
         .catch((error) => {
             console.error('Error:', error);
         });
     }
-
 
     // fetch cart from backend
     fetchCart = () => {
@@ -191,24 +203,6 @@ export default class ProductCard extends Component {
                 </div>
             </div>
         ));
-    }
-
-
-    // sorting the array with price according to state
-    onchangeHandlerSortLowToHigh() {
-        let productSampleDataSort = this.state.productSampleData;
-        productSampleDataSort.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-        this.setState({
-            productSampleData: productSampleDataSort
-        })
-    }
-
-    onChangeHandlerHighToLow(){
-        let productSampleDataSort = this.state.productSampleData;
-        productSampleDataSort.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-        this.setState({
-            productSampleData: productSampleDataSort
-        })
     }
 
     onChangeHandlerDefault() {

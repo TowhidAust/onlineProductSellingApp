@@ -5,7 +5,6 @@ import {
   Route,
 } from "react-router-dom";
 import Home from "./components/Home";
-import ProductDetails from "./components/ProductDetails";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CartPage from './components/CartPage';
 
@@ -36,7 +35,6 @@ export default class App extends Component {
         <div className="MainAppContainer"> 
           <Switch>
             <Route path="/" exact component={Home}></Route>
-            <Route path={`/ProductDetails/:${this.props.productid}`} exact component={ProductDetails} productdescription={this.props.productdescription}></Route>
             <Route path="/CartPage" exact component={CartPage}></Route>  
             <Route path="/Admin" exact component={Admin}></Route>  
             <Route path="/AdminDetails" exact component={adminDetails}></Route>  
