@@ -74,11 +74,14 @@ export default class Home extends Component {
             else if (data.title.toLowerCase().includes(this.state.search.toLowerCase())) {
                 return data;
             }
+
+            return false;
         });
 
         this.setState({
             searchSampleData: items
         });
+
     }
 
  
@@ -89,7 +92,7 @@ export default class Home extends Component {
             <div className="products" key={index}>
                  <img src={d.picture} alt="prodImg"/>
                  
-                 <p style={{listStyle:"none", fontSize:"1em", marginTop: "1em"}} onClick={()=>{this.productTitleClickHandler(d)}} to={`/ProductDetails/:${d._id}`} productid = {d._id} productdescription = {d.description}>{d.title}</p>
+                 <p style={{listStyle:"none", fontSize:"1em", marginTop: "1em"}} productid = {d._id} productdescription = {d.description}>{d.title}</p>
  
                  <div className="priceAndDiscount">
                      <p>BDT. {d.price}</p>
@@ -97,7 +100,7 @@ export default class Home extends Component {
                  </div>
  
                  <div className="addTocart">
-                     <Button onClick={() => { this.addToCartClickHandler(d._id, d.picture, d.title, d.price);}} productname = {d.title} productprice = {d.price}>Add to cart</Button>
+                     <Button productname = {d.title} productprice = {d.price}>Add to cart</Button>
                  </div>
              </div>
          ));
