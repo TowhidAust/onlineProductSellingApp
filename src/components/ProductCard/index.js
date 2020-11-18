@@ -48,7 +48,7 @@ export default class ProductCard extends Component {
         fetch('http://localhost:5000/products')
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
+            // console.log('Success:', data);
             // now modify the data
             let _productSampleData = [];
             for (let key in data) {
@@ -75,7 +75,7 @@ export default class ProductCard extends Component {
         fetch('http://localhost:5000/cart')
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
+                // console.log('Success:', data);
                 let _quantity = data.quantity;
 
                 if (_quantity) {
@@ -130,7 +130,7 @@ export default class ProductCard extends Component {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
+            // console.log('Success:', data);
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -150,7 +150,7 @@ export default class ProductCard extends Component {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success:', data);
+                    // console.log('Success:', data);
                 })
                 .catch((error) => {
                     console.error('Error:', error);

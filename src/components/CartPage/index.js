@@ -37,7 +37,7 @@ export default class CartPage extends Component {
         fetch('http://localhost:5000/cart')
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
+            // console.log('Success:', data);
             let _chosenProductsJSON = get(data, ['chosenProducts'], {});
 
             // refactor the data
@@ -76,7 +76,7 @@ export default class CartPage extends Component {
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
+                // console.log('Success:', data);
                 this.setState({
                     totalAmount: _totalAmount
                 })
@@ -173,11 +173,13 @@ export default class CartPage extends Component {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
+            // console.log('Success:', data);
             this.setState({
                 cartCount: this.state.cartCount + 1
             })
             this.addQuantityOnCartDatabase();
+        }).then(() => {
+            this.addTotalAmountToDatabase();
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -197,11 +199,16 @@ export default class CartPage extends Component {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
-            // this.setState({
-            //     cartCount: this.state.cartCount + 1
-            // })
-            // this.addQuantityOnCartDatabase();
+            // console.log('Success:', data);
+
+            this.setState({
+                cartCount: this.state.cartCount - 1
+            });
+
+            this.addQuantityOnCartDatabase();
+            
+        }).then(() => {
+            this.addTotalAmountToDatabase();
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -220,14 +227,14 @@ export default class CartPage extends Component {
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
+                // console.log('Success:', data);
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
     }
 
-  
+   
     productMinusClickHandler = (e) => {
         let productId = e.target.getAttribute('productid');
         let _chosenProductsJson = this.state.chosenProducts;
@@ -235,16 +242,16 @@ export default class CartPage extends Component {
         let data = {
             "productId": productId
         }
-        this.removeFromDBCartAfterClickingMinusButton(data);
+
 
         for (let i in _chosenProductsJson) {
             let currentProdId = _chosenProductsJson[i]['_id'];
             let currentProdQuantity = _chosenProductsJson[i]['quantity'];
 
             if (currentProdId === productId) {
-
                 let minimizeProduct = currentProdQuantity - 1;
-                if (minimizeProduct >= 0) {
+                if (minimizeProduct >= 1) {
+                    this.removeFromDBCartAfterClickingMinusButton(data);
                     _chosenProductsJson[i]['quantity'] = minimizeProduct;
                 }
                 let totalAmount = this.calculateTotalAmount(_chosenProductsJson);
@@ -252,10 +259,8 @@ export default class CartPage extends Component {
                     chosenProducts: _chosenProductsJson,
                     totalAmount: totalAmount
                 })
-
                 return false;
             }
-
         }
 
     }
@@ -305,7 +310,7 @@ export default class CartPage extends Component {
 
     termsCheckBoxClickHandler = (e) => {
         let checkedStatus = e.target.checked;
-        console.log("e.target.checked", e.target.checked);
+        // console.log("e.target.checked", e.target.checked);
         if (checkedStatus === true) {
             this.setState({
                 termsAgreeCheckbox : true
