@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { AiOutlineUser } from 'react-icons/ai';
 import { v4 as uuidv4 } from 'uuid';
 import { database } from '../../firebase';
+import LeftDrawer from '../Left_Drawer';
 
 
 
@@ -116,12 +118,8 @@ export default class AddNewProduct extends Component {
                 "discount": this.state.productDiscount,
             }
 
-            database.ref('/products').once("value").then((snapshot) => {
-                console.log("data from db=",snapshot.val());
-            })
 
-
-
+            // TODO need to use backend server to add the product with security.
             database.ref('/Products').push(data).then((snapshot) => {
                 console.log(snapshot.key);
                 alert("product data added successfully");
@@ -133,8 +131,23 @@ export default class AddNewProduct extends Component {
 
     render() {
         return (
-            <div className="addProductContainer">
 
+            <>
+            <div className="admin_header">
+                <h3 className="logo">
+                    <span>Test Logo</span>
+                </h3>
+                <span className="userIcon">
+                        <AiOutlineUser />
+                </span>
+            </div>
+            <div className="adminProductsCard">
+
+                <div className="leftDrawer">
+                            <LeftDrawer/>
+                </div>
+                <div className="rightPanel">
+                        
                 <div className="addProductInner">
                 <div>
                     <div>Product Name:</div>
@@ -165,10 +178,12 @@ export default class AddNewProduct extends Component {
                     <span onClick={ (e)=>{this.onclickInactiveHandler(e)}}>Inactive</span>
                 </div>
 
-                <div><button onClick={(e)=>{this.submitButtonClickHandler(e)}}>Add Product</button></div>
+                <div><button onClick={(e) => { this.submitButtonClickHandler(e) }}>Add Product</button></div>
+                </div>
             </div>
                 
             </div>
+        </>
         )
     }
 }

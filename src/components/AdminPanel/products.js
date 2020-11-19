@@ -51,8 +51,38 @@ export default class Products extends Component {
 
 
     componentDidMount() {
-        
+        this.fetchProductFromBackendDatabase();
     }
+
+     // fetch products from backend
+     fetchProductFromBackendDatabase = () => {
+        // first fetch products from backend
+        fetch('http://localhost:5000/products')
+        .then(response => response.json())
+        .then(data => {
+            // console.log('Success:', data);
+            // now modify the data
+            let _productSampleData = [];
+            for (let key in data) {
+                let product = data[key];
+                _productSampleData.push(product);
+            }
+
+            if (data.msg !== 'undefined') {
+                this.setState({
+                    productSampleData: _productSampleData
+                })
+            }
+
+        }).then(() => {
+           
+            
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
 
 
     createProductCards=()=>{
@@ -69,6 +99,7 @@ export default class Products extends Component {
             </div>
         ));
     }
+
 
 
     render() {
@@ -95,7 +126,6 @@ export default class Products extends Component {
                                             to={{ pathname: "/AddNewProduct" }}>
                                 <button>Add New Product</button>
                             </Link>
-                            
                         </div>     
                         <div className="cardsContainer">
                             {this.createProductCards()}

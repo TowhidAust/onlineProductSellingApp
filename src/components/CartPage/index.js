@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import "./cartPage.css";
-import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineDelete, AiOutlineSearch, AiOutlineShoppingCart, AiOutlineUser } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { TiTick } from 'react-icons/ti';
 import { get } from 'lodash';
+import { database } from '../../firebase';
 export default class CartPage extends Component {
 
     constructor(props) {
@@ -346,6 +347,55 @@ export default class CartPage extends Component {
         }
     }
     
+    deleteProductsAndUpdateTheState = (e, prodId) => {
+        let productsData = this.state.chosenProducts;
+        let cartCount = 0;
+        console.log(" chosen products data", productsData);
+        // first remove from the state
+        for (let i in productsData) {
+            let id = productsData[i]['_id'];
+            if (prodId === id) {
+                cartCount = cartCount + 1;
+                productsData.splice(i, 1);
+            }
+        }
+       
+        // this.setState({
+        //     chosenProducts: productsData,
+        //     cartCount: this.state.cartCount - cartCount
+        // });
+
+
+        
+        // minimize the cart count 
+        // this.addTotalAmountToDatabase();
+
+        // fix the quantity and total amount
+
+        // TODO now need to remove this cart data from database backend. for now using here
+        database.ref('/Cart/chosenProducts').once("value").then(snapshot => {
+            let productsJson = snapshot.val();
+            for (let key in productsJson) {
+                let productID = productsJson[key]['_id'];
+                if (productID === prodId) {
+                    database.ref(`/Cart/chosenProducts/${key}`).remove().then((snapshot) => {
+                        this.addTotalAmountToDatabase();
+                        this.setState({
+                            chosenProducts: productsData,
+                            cartCount: this.state.cartCount - cartCount
+                        });
+
+                       
+                    }).then(() => {
+                        this.addQuantityOnCartDatabase();
+                    }).catch((err) => {
+                        console.log(err);
+                    })
+                }
+            }
+        })
+
+    }
     renderChosenProductDetails() {
         let productsData = this.state.chosenProducts;
         
@@ -375,6 +425,8 @@ export default class CartPage extends Component {
                         </div>
                         <div>Total Price: <span>{ d.quantity * d.price}</span></div>
                     </div>
+
+                    <span className="deleteCartProd" onClick={(e)=>{this.deleteProductsAndUpdateTheState(e, d._id)}} productid = {d._id}><AiOutlineDelete/></span>
                 </div>
             ));
     }

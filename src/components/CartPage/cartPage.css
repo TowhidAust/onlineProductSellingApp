@@ -18,6 +18,14 @@
     padding: 2em;
     border: 1px solid #ddd;
     border-radius: 1em;
+    position: relative;
+}
+
+.deleteCartProd{
+    position: absolute;
+    top: 4%;
+    right: 2%;
+    cursor: pointer;
 }
 
 .orderSummary{

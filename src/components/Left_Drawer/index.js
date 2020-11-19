@@ -16,11 +16,10 @@ export default class LeftDrawer extends Component {
               </div>
             </div>
         <ul className="left_drawer_ul">
-       
-          
-            <li><Link to={"/"} >Promotion</Link></li>
-            <li><Link to={"/"} >Promo Codes</Link></li>
-            <li><Link to={"/"} >Add Promo Codes</Link></li>
+    
+            <li><Link to={"/"} >Home</Link></li>
+            <li><Link to={"/Promocodes"} >Promo Codes</Link></li>
+            <li><Link to={"/AddPromocodes"} >Add Promo Codes</Link></li>
             <li><Link  to={"/Orders"} >Orders</Link></li>
             <li><Link  to={"/AdminProducts"} >Products</Link></li>
           </ul>
