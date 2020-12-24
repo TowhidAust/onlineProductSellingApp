@@ -15,7 +15,7 @@ export default class ProductCard extends Component {
                   "title": "TShirtXL",
                   "picture": "https://cdn11.bigcommerce.com/s-pkla4xn3/images/stencil/1280x1280/products/11753/114418/2018-Fashion-New-Male-Shirt-Long-Sleeve-Mens-Clothes-Oblique-Button-Dress-Shirts-Mandarin-Collar-Men__02469.1574244136.jpg?c=2",
                   "price": 1500,
-                  "discount": "5%",
+                  "discount": "5",
                 },
                 {
                     "_id": "5f4011d1fadf274a8862865b",
