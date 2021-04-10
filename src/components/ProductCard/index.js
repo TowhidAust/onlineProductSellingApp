@@ -10,34 +10,32 @@ export default class ProductCard extends Component {
         this.state = {
             isDataLoaded: false,
             productSampleData: [
+
+
                 {
-                  "_id": "5f4011d1fadf274a8862865a",
-                  "title": "TShirtXL",
-                  "picture": "https://cdn11.bigcommerce.com/s-pkla4xn3/images/stencil/1280x1280/products/11753/114418/2018-Fashion-New-Male-Shirt-Long-Sleeve-Mens-Clothes-Oblique-Button-Dress-Shirts-Mandarin-Collar-Men__02469.1574244136.jpg?c=2",
-                  "price": 1500,
-                  "discount": "5",
+                    "id": 1,
+                    "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+                    "price": 109.95,
+                    "description": "Your perfect pack for everyday use ...everyday",
+                    "category": "men clothing",
+                    "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
                 },
                 {
-                    "_id": "5f4011d1fadf274a8862865b",
-                    "title": "TShirtSM",
-                    "picture": "https://cdn11.bigcommerce.com/s-pkla4xn3/images/stencil/1280x1280/products/11753/114418/2018-Fashion-New-Male-Shirt-Long-Sleeve-Mens-Clothes-Oblique-Button-Dress-Shirts-Mandarin-Collar-Men__02469.1574244136.jpg?c=2",
-                    "price": 1100,
-                    "discount": "15",
-                  },
-                  {
-                    "_id": "5f4011d1fadf274a8862865b",
-                    "title": "TShirtSM",
-                    "picture": "https://cdn11.bigcommerce.com/s-pkla4xn3/images/stencil/1280x1280/products/11753/114418/2018-Fashion-New-Male-Shirt-Long-Sleeve-Mens-Clothes-Oblique-Button-Dress-Shirts-Mandarin-Collar-Men__02469.1574244136.jpg?c=2",
-                    "price": 1100,
-                    "discount": "15",
-                  },
-                  {
-                    "_id": "5f4011d1fadf274a8862865b",
-                    "title": "TShirtSM",
-                    "picture": "https://cdn11.bigcommerce.com/s-pkla4xn3/images/stencil/1280x1280/products/11753/114418/2018-Fashion-New-Male-Shirt-Long-Sleeve-Mens-Clothes-Oblique-Button-Dress-Shirts-Mandarin-Collar-Men__02469.1574244136.jpg?c=2",
-                    "price": 1100,
-                    "discount": "15",
-                  }
+                    "id": 20,
+                    "title": "DANVOUY Womens T Shirt Casual Cotton Short",
+                    "price": 12.99,
+                    "description": "95%Cotton,5%Spandex, Features: Casual, ...Winter.",
+                    "category": "women clothing",
+                    "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg"
+                },
+                {
+                    "id": 1,
+                    "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+                    "price": 109.95,
+                    "description": "Your perfect pack for everyday use ...everyday",
+                    "category": "men clothing",
+                    "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+                }
               ],
             quantity: 0,
             chosenProducts: []
@@ -46,19 +44,16 @@ export default class ProductCard extends Component {
     }
     
     componentDidMount() {
-        
-        // this.fetchProductFromBackendDatabase();
-        // this.fetchCart();
+        this.fetchProductFromBackendDatabase();
         this.setState({
             isDataLoaded: true,
         });
-        
     }
 
-    // fetch products from backend
+    // fetch products
     fetchProductFromBackendDatabase = () => {
         // first fetch products from backend
-        fetch('http://localhost:5000/products')
+        fetch('https://fakestoreapi.com/products')
         .then(response => response.json())
         .then(data => {
             // console.log('Success:', data);
@@ -77,7 +72,7 @@ export default class ProductCard extends Component {
 
         }).then(() => {
             let searchKey = this.props.searchKey;
-            console.log(searchKey);
+            console.log("search key",searchKey);
             // const items = this.state.productSampleData.filter((data)=>{
             //     if (searchKey == null) {
             //         console.log('search state is null');
@@ -95,99 +90,34 @@ export default class ProductCard extends Component {
         });
     }
 
-    // fetch cart from backend
-    fetchCart = () => {
-        // Fetch cart
-        fetch('http://localhost:5000/cart')
-            .then(response => response.json())
-            .then(data => {
-                // console.log('Success:', data);
-                let _quantity = data.quantity;
-
-                if (_quantity) {
-                    this.setState({
-                        quantity: _quantity
-                    });
-                }
-
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    }
+   
 
     addToCartClickHandler(productID, productPicture, productName, productPrice) {
-        // console.log(productID, productPicture, productName, productPrice);
+        console.log(productID, productPicture, productName, productPrice);
 
         let data = {
-            "_id": productID,
+            "id": productID,
             "title": productName,
-            "picture": productPicture,
+            "image": productPicture,
             "price": productPrice,
-            "discount": "15%",
             "quantity": 1,
         }
         let _chosenProducts = this.state.chosenProducts;
         let mergedProd = [..._chosenProducts, data];
+        console.log("merged products", mergedProd);
         this.setState({
             quantity: this.state.quantity + 1,
             chosenProducts: mergedProd
         });
-
-
-        this.addCartInfoOnBackendDatabase(data);
-
-
+        // this.addCartInfoOnBackendDatabase(data);
         this.setState({
             isDataLoaded: true,
         });
     }
 
-
-    addCartInfoOnBackendDatabase = (data) => {
-        // add product on cart database
-        fetch('http://localhost:5000/addToCart', {
-        method: 'POST', // or 'PUT'
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-
-
-    // add quantity on cart database
-    addQuantityOnCartDatabase = () => {
-            fetch('http://localhost:5000/addQuantityToCart', {
-                method: 'POST', // or 'PUT'
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({quantity:this.state.quantity}),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // console.log('Success:', data);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-    }
-
     componentDidUpdate(prevProps, prevState) {
         if (prevState.quantity !== this.state.quantity) {
-        
-            this.addQuantityOnCartDatabase();
-
+            // this.addQuantityOnCartDatabase();
             this.props.getDataFromProductCard({
                 quantity: this.state.quantity,
                 chosenProducts: this.state.chosenProducts
@@ -203,17 +133,18 @@ export default class ProductCard extends Component {
        return (
         data.map((d,index) =>
            <div className="products" key={index}>
-                <img src={d.picture} alt="prodImg"/>
+                <img src={d.image} alt="prodImg"/>
                 
-                <p style={{listStyle:"none", fontSize:"1em", marginTop: "1em"}} onClick={()=>{this.productTitleClickHandler(d)}} to={`/ProductDetails/:${d._id}`} productid = {d._id} productdescription = {d.description}>{d.title}</p>
+                <p style={{listStyle:"none", fontSize:"1em", marginTop: "1em"}} onClick={()=>{this.productTitleClickHandler(d)}} to={`/ProductDetails/:${d.id}`} productid = {d.id} productdescription = {d.description}>{d.title}</p>
 
                 <div className="priceAndDiscount">
                     <p>BDT. {d.price}</p>
-                    <span>{d.discount}%</span>
+                    <p>{d.category}</p>
+                    {/* <span>{d.discount}%</span> */}
                 </div>
 
                 <div className="addTocart">
-                    <Button onClick={() => { this.addToCartClickHandler(d._id, d.picture, d.title, d.price);}} productname = {d.title} productprice = {d.price}>Add to cart</Button>
+                    <Button onClick={() => { this.addToCartClickHandler(d.id, d.image, d.title, d.price);}} productname = {d.title} productprice = {d.price}>Add to cart</Button>
                 </div>
             </div>
         ));

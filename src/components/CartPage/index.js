@@ -9,6 +9,7 @@ export default class CartPage extends Component {
 
     constructor(props) {
         super(props);
+        console.log("inside cart page constructor", props);
         this.state = {
             isDataLoaded: false,
             cartCount: 0,
@@ -396,7 +397,9 @@ export default class CartPage extends Component {
         })
 
     }
+
     renderChosenProductDetails() {
+        console.log("cart props", this.props)
         let productsData = this.state.chosenProducts;
         
         return (

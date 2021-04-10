@@ -6,6 +6,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import logo from '../../../src/img/logo.png'
 
 export default class Home extends Component {
 
@@ -114,7 +115,7 @@ export default class Home extends Component {
                 <>
                     <section className="productBanner">
                         <div className="headerSection">
-                            <div className="homeLogo"><h3>Test Logo</h3></div>
+                            <div className="homeLogo"><h3><img src={logo} style={{width: "8em", height:"3em"}}/></h3></div>
                             <div className="searchInput">
                                 <i><AiOutlineSearch/></i>
                                 <input onChange={(e)=>{this.searchOnchangeHandler(e)}} type="text" placeholder="Search"/>

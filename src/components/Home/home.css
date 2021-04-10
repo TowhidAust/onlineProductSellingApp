@@ -21,7 +21,7 @@
   }
 
   .homeLogo{
-    background-color: yellow;
+    background-color: #ffffff;
     border-radius: 5em;
     position: relative;
     width: 8em;
@@ -69,7 +69,7 @@
   }
 
   .homeCart .cartCount{
-    background-color: yellow;
+    background-color: #2CBAD7;
     border-radius: 100%;
     width: 1.5em;
     height: 1.5em;

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 export default class AddToCartHome extends Component {
     constructor(props){
         super(props);
+        
         this.state={
             isDataLoaded: false,
             isItemAdded: false,
