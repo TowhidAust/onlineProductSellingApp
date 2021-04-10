@@ -27,7 +27,7 @@ export default class CartPage extends Component {
     }
 
     componentDidMount() {
-        this.fetchCartFromDatabase();
+        // this.fetchCartFromDatabase();
     }
 
 

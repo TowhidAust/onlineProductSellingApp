@@ -21,7 +21,7 @@ export default class Home extends Component {
     }
     
     componentDidMount(){
-        this.fetchProductFromBackendDatabase();
+        // this.fetchProductFromBackendDatabase();
     }
 
 
